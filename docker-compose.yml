@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  api:
+    # Constrói a imagem a partir do Dockerfile no diretório atual.
+    build: .
+    # Mapeia a porta 8000 do host para a porta 8000 do contêiner.
+    ports:
+      - "8000:8000"
+    # O comando do Dockerfile é sobrescrito para remover o '--reload'.
+    # Sem um volume montado, o banco de dados será temporário e as alterações de código não serão refletidas automaticamente.
+    command: uvicorn app:app --host 0.0.0.0 --port 8000
